@@ -11,6 +11,8 @@ and/or pointers.
 The base used for this cheat was made by [cazzwastaken](https://github.com/cazzwastaken).
 thanks cazz, this is probably the most far i've got along developing cheats.
 
+Visual Studio 2022 was used for this Project
+
 *This cheat is very minimal on features, unstable and tends to crash.*
 
 ## Visual ESP preview - (HP-Bar/Name)
