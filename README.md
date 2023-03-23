@@ -5,7 +5,7 @@
 to stop developing this project as of now.</b>
 <b>The SDK used in this project will be deprecated when Source 2 is public.</b>
 
-There is not much to look at this buggy, unoptimized mess other than (probably) signatures
+There is not much to look at this buggy, unoptimized and incompleted mess other than (probably) signatures
 and/or pointers.
 
 The base used for this cheat was made by [cazzwastaken](https://github.com/cazzwastaken).
