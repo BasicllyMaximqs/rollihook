@@ -110,19 +110,6 @@ void hooks::Destroy() noexcept
 	MH_Uninitialize();
 }
 
-bool __stdcall hooks::DoPostScreenEffectsHook(int value) noexcept
-{
-
-	return DoPostScreenEffectsOriginal(value);
-}
-
-void __stdcall hooks::GetColorModulation(void* ecx, void* edx, float* r, float* g, float* b) noexcept
-{
-	GetColorModulationOriginal(ecx, edx, r, g, b);
-
-	// exclude stuff we dont want modulated
-
-}
 CVector ClampAngles(CVector angles) {
 
 	while (angles.y > 180)
@@ -173,7 +160,7 @@ void __stdcall hooks::OverrideView(CViewSetup* vsView) noexcept
 	
 	if (config::override_viewmodel)
 	{
-		//put stuff here
+			//too lazy
 	}
 
 
@@ -209,15 +196,6 @@ void __stdcall hooks::OverrideView(CViewSetup* vsView) noexcept
 
 void __stdcall hooks::FireEventClientSide(IGameEvent* eevent)
 {			
-	//theorie:
-	/*
-		Engine Retract = LocalPlayer Index Number
-
-
-		UserId != entityID
-		BUT through processing it is
-	*/
-
 	if (interfaces::engine->IsInGame() && eevent) {
 		hacks::bombRevealPlant(eevent);
 		hacks::setClanTag(eevent);
@@ -268,21 +246,6 @@ void __stdcall hooks::FrameStageNotify( ClientFrameStage_t stage) noexcept
 
 	auto shadows = interfaces::cvar->findVar("cl_csm_enabled");
 	shadows->SetValue(config::remove_shadows);
-
-	/*for (auto i = interfaces::materialSystem->FirstMaterial(); i != interfaces::materialSystem->InvalidMaterial(); i = interfaces::materialSystem->NextMaterial(i))
-	{
-		auto pMaterial = interfaces::materialSystem->GetMaterial(i);
-
-		// ^ add a second check for invalid material.
-
-		if (!pMaterial)
-			continue;
-
-		auto textGroup = pMaterial->GetTextureGroupName();
-		// ^ add a second check for invalid material.
-
-
-	}*/
 
 	FrameStageNotifyOriginal(interfaces::client, stage);
 }
@@ -400,7 +363,7 @@ void __stdcall hooks::DrawModel(
 	const std::int32_t flags
 ) noexcept
 {
-
+	//main menu render fix, just return the func lol
 	if (!globals::localPlayer)
 		return DrawModelOriginal(interfaces::studioRender, results, info, bones, flexWeights, flexDelayedWeights, modelOrigin, flags);;
 
@@ -522,8 +485,6 @@ void __stdcall hooks::PaintTraverse(std::uintptr_t vguiPanel, bool forceRepaint,
 					continue;
 				}
 
-				//render_text(top.x, top.y + 20, 255, 255, 255, 255, pwcsName);
-
 				// screen position of feet
 				// we subtract 9.f here because we want the box BELOW their feet
 				CVector bottom;
@@ -593,6 +554,7 @@ void __stdcall hooks::PaintTraverse(std::uintptr_t vguiPanel, bool forceRepaint,
 
 					// 0 to 78 to 79
 					// 0 to 71 to 72
+					// well this is fucking unoptimized x)
 					CVector head;
 					CVector upperChest;
 					CVector rightArm1;
